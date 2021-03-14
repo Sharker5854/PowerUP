@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+	{{ super() }}
+
+	<div class="reg-auth-form">
+		<form action="{{ url_for('register') }}" method="POST" class="form">
+			<h1 class="form-name">РЕГИСТРАЦИЯ</h1>
+			{{ register_form.hidden_tag() }}
+
+			{% for field in register_form if field.name not in ['csrf_token', 'submit'] %}
+				{{ field.label }}
+
+				{% if field.errors %}
+					{{ field(class="invalid") }}
+					<span class="invalid-feedback">
+						{% for e in field.errors %}
+							{{e}}
+						{% endfor %}
+					</span>
+				{% else %}
+					{{ field }}
+				{% endif %}
+			{% endfor %}
+
+			{{ register_form.submit }}
+		</form>
+	</div>
+
+{% endblock %}
+
+
+

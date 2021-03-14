@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+	{{ super() }}
+
+	<div class="about-us">
+
+		<div class="who-we">
+			<h1 class="about-us-title">Кто мы</h1>
+			<p class="who-we-text">
+				Мы - опытная компания по производству многофункциональных зарядных устройств для мобильных девайсов, 
+				которая занимает лидирующие позиции на рынке в своей сфере. Более 10 лет наша компания развивала
+				свои технологии производства, чтобы достичь наивысшего качества конечного продукта.
+			</p>
+			<img src="{{ url_for('static', filename='images/pedestal.jpg') }}" class="who-we-picture" width="800" height="450">
+		</div>
+
+		<div class="who-choose">
+			<h1 class="about-us-title">Нас выбирают</h1>
+
+			<div id="who-choose-list1">
+				<ul class="who-choose-ul">
+					<li class="who-choose-list-item"><p style="margin-left: 1vw;">Банки</p></li>
+					<li class="who-choose-list-item"><p style="margin-left: 1vw;">Аэропорты</p></li>
+					<li class="who-choose-list-item"><p style="margin-left: 1vw;">Рестораны</p></li>
+				</ul>
+			</div>			
+
+			<div id="who-choose-list2">
+				<ul class="who-choose-ul">
+					<li class="who-choose-list-item"><p style="margin-left: 1vw; margin-top: -1vh;">Торговые центры</p></li>
+					<li class="who-choose-list-item"><p style="margin-left: 1vw;">Обучающие центры</p></li>
+					<li class="who-choose-list-item"><p style="margin-left: 1vw;">Медицинские центры</p></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	
+{% endblock %}

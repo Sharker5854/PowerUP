@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{{ super() }}
+
+<h1 class="make-order-title">Оформление заказа</h1>
+
+<div class="make-order-block">
+	<div class="make-order-form-block-1"></div> <!-- !!!CRUTCH!!! it made to display form in position:absolute; and .order-general-info dont move out :D -->
+	<div class="make-order-form-block-2">
+		<form action="" method="POST" class="make-order-form">
+			{{ form.hidden_tag() }}
+
+			{% for field in form if field.name not in ['csrf_token', 'submit'] %}
+				<div class="input-group mb-3" style="width: 41vw;">
+					<label class="input-group-text make-order-label" style="background-color: #DCDEE1; border-color: #A5AAAF; height: 4.7vh; width: 5.3vw;" id="inputGroup-sizing-sm" for="field-{{ field.id }}">{{ field.label }}</label>
+					{% if field.errors %}
+						{{ field(class="form-control invalid", id="field-"+field.id, style="height: 4.7vh;") }}
+					{% else %}
+						{{ field(class="form-control", id="field-"+field.id, style="height: 4.7vh;") }}
+					{% endif %}
+				</div>
+			{% endfor %}
+
+			{{ form.submit(class="btn btn-success", style="height: 6vh; width: 12vw; font-size: 21px; font-weight: 400;") }}
+		</form>
+	</div>
+
+	<div class="{% if form.errors %} order-general-info shifted {% else %} order-general-info {% endif %}">
+		<h1 class="order-info-title">Итого</h1>
+
+		{% for device in devices_data['added_devices'] %}
+			<div class="order-item">
+				<button onclick="deleteFromBasket('{{ device.id }}', '{{ spec_urls['DELETING_FROM_BASKET'] }}')" class="order-delete">
+					<img src="{{ url_for('static', filename='images/cross.svg') }}" width="35" height="35">
+				</button>
+
+				<img class="order-picture" src="{{ url_for('static', filename=picture_dir + device.picture) }}" width="77" height="77">
+
+				<div class="order-info">
+					<a href="{{ url_for('product_page', product_id=device.id) }}" class="order-name">{{ device.name }}</a>
+				
+					<h5 class="order-price">{{ device.price }} руб.</h5>
+				</div>
+
+				<h5 class="order-quantity">{{ devices_data['device_quantity'][device.id] }} шт.</h5>
+			</div>
+		{% endfor %}
+
+		<h3 class="order-general-price">Итоговая стоимость: <span class="order-general-price-data">{{ devices_data['general_price'] }} рублей</span></h3>
+		
+	</div>
+</div>
+
+{% endblock %}

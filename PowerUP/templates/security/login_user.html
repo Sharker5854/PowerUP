@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+	{{ super() }}
+
+	<div class="reg-auth-form">
+		<form action="{{ url_for('login') }}" method="POST" class="form">
+			<h1 class="form-name">АВТОРИЗАЦИЯ</h1>
+			{{ login_form.hidden_tag() }}
+
+			{% for field in login_form if field.name not in ['csrf_token', 'submit'] %}
+			
+				{% if field.name == 'remember' %} <!--Для поля "Запомнить меня"-->
+					{{ field }}
+					{{ field.label }}
+				{% else %} <!--Для всех остальных полей-->
+					{{ field.label }}
+
+					{% if field.errors %} <!--Если данные введены некорректно-->
+						{{ field(class="invalid") }}
+						<span class="invalid-feedback">
+							{% for e in field.errors %}
+								{{e}}
+							{% endfor %}
+						</span>
+					{% else %}
+						{{ field }}
+					{% endif %}
+				{% endif %}
+
+			{% endfor %}
+
+			{{ login_form.submit }}
+
+			<div class="reg-suggestion">
+				<h4>Нет аккаунта?</h4>
+				<a href="{{ url_for('register') }}">Регистрация</a>
+			</div>
+		</form>
+
+	</div>
+
+{% endblock %}
