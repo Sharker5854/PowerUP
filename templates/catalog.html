@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+	{{ super() }}
+
+
+	<form id="search-form" class="d-flex">
+		<input id="search-input" class="form-control me-2" name="q" value="{{ request.args.get('q', '') }}" type="search" placeholder="Поиск..." aria-label="Search">
+		<button for="#search-input" class="btn btn-dark" type="submit">Найти</button>
+	</form>
+
+
+	{% for product in pages.items %}
+		<div class="card">
+
+			<a href="{{ url_for('product_page', product_id=product.id) }}">
+
+				<img src="{% if product.picture != None %} 
+							{{ url_for('static', filename='image_storage/product_pic/' + product.picture) }} 
+						{% else %}
+							{{ url_for('static', filename='images/device_default_pic.jpg') }}
+						{% endif %}"
+						class="card-img-top" alt="Картинка">
+			</a>
+			<div class="card-body">
+				<a href="{{ url_for('product_page', product_id=product.id) }}" class="card-text">{{ product.name }}</a>
+				<h3 class="card-title">{{ product.price }} руб.</h3>
+				<button type="button" onclick="addToBasket('{{ product.id }}', '{{ spec_urls['ADDING_BASKET'] }}')" id="addToBasket-btn-{{ product.id }}" class="btn btn-danger bskt" style="box-shadow: none;">Добавить в корзину</button>
+		  	</div>
+
+		</div>
+	{% endfor %}
+
+
+	<nav aria-label="..." class="pagination-nav">
+		<ul class="pagination justify-content-center">
+			<li {% if pages.has_prev %} class="page-item active" {% else %} class="page-item disabled" {% endif %}>
+				<a {% if pages.has_prev %} class="page-link active" {% else %} class="page-link disabled" {% endif %} href="{{ request.base_url }}?page={{ pages.prev_num }}" aria-label="Previous">&#10094;</a> <!-- In 'href' we get current url-adress and add ?page to it -->
+			</li>
+
+			{% for page in pages.iter_pages() %}
+			<li {% if page == pages.page %} class="page-item active" {% endif %}>
+				<a {% if page == pages.page %} class="page-link active" {% else %} class="page-link" {% endif %} href="{{ request.base_url }}?page={{ page }}">{{ page }}</a>
+			</li>
+			{% endfor %}
+
+			<li {% if pages.has_next %} class="page-item active" {% else %} class="page-item disabled" {% endif %}>
+				<a {% if pages.has_next %} class="page-link active" {% else %} class="page-link disabled" {% endif %} href="{{ request.base_url }}?page={{ pages.next_num }}" aria-label="Next">&#10095;</a>
+			</li>
+		</ul>
+	</nav>	
+{% endblock %}

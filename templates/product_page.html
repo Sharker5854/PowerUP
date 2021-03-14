@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{{ super() }}
+
+
+<div class="product-page">
+	<img src="{{ url_for('static', filename = picture_dir + product.picture) }}" width="600" height="600">
+	<p class="product-description">{{ product.description }}</p>
+	<h1 class="product-name">{{ product.name }}</h1>
+	<h5 class="product-type">{{ product_device_type }}</h5>
+	<button type="button" onclick="addToBasket('{{ product.id }}', '{{ spec_urls['ADDING_BASKET'] }}')" id="addToBasket-btn-{{ product.id }}" class="btn btn-danger bskt" style="box-shadow: none; width: 18vw; height: 8vh; font-size: 25px; margin-left: 48.5vw;">Добавить в корзину</button>
+	<h1 class="product-price">{{ product.price }} рублей</h1>
+</div>
+
+
+{% endblock %}
