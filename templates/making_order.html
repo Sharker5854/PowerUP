@@ -8,7 +8,7 @@
 
 <div class="make-order-block">
 	<div class="make-order-form-block-1"></div> <!-- !!!CRUTCH!!! it made to display form in position:absolute; and .order-general-info dont move out :D -->
-	<div class="make-order-form-block-2">
+	<div class="{% if form.errors %} make-order-form-block-2 shifted {% else %} make-order-form-block-2 {% endif %}">
 		<form action="" method="POST" class="make-order-form">
 			{{ form.hidden_tag() }}
 

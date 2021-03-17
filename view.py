@@ -325,7 +325,7 @@ def search(device_type, q):
 	if device_type == 'all' and not q:
 		products = Device.query
 	elif device_type == 'all' and q:
-		products = Device.query.filter(Device.name.contains(q) | Device.description.contains(q))
+		products = Device.query.filter(Device.name.contains(q))
 	elif device_type != 'all' and not q:
 		products = Device.query.filter(Device.dev_type == DeviceType.id).filter(DeviceType.type_name == device_type) #get devices whose   dev_type == DeviceType.id   and type_name of this DeviceType == "device_type"(that we've got in query)
 	elif device_type != 'all' and q:

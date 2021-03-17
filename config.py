@@ -2,7 +2,6 @@ import uuid
 
 class Configuration(object):
 	DEBUG = True
-	SITE_DOMEN = 'http://localhost:5000/'
 	SECRET_KEY = uuid.uuid4().hex
 	SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:1379@localhost/flsite_database'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
