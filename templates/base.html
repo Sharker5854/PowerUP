@@ -57,7 +57,6 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="{{ url_for('catalog', device_type = 'Портативный') }}">Переносные power-банки</a></li>
 							<li><a class="dropdown-item" href="{{ url_for('catalog', device_type = 'Малая станция') }}">Малые зарядные станции</a></li>
-							<!-- <li><hr class="dropdown-divider"></li> -->
 							<li><a class="dropdown-item" href="{{ url_for('catalog', device_type = 'Большая станция') }}">Большие зарядные станции</a></li>
 						</ul>
 					</li>
@@ -73,11 +72,6 @@
 			<a href="{{ url_for('basket') }}" class="basket-btn">
 				<img src="{{ url_for('static', filename='images/basket.svg') }}" width="64" height="64" class="basket-icon">
 			</a>
-
-			<!--
-			<a href="{{ url_for('basket') }}" class="basket-btn">
-				<img src="{{ url_for('static', filename='images/basket.svg') }}" width="56" height="56" class="basket-icon">
-			</a> -->
 
 
 			{% if current_user.is_authenticated %}
