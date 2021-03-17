@@ -2,6 +2,10 @@
 Online Store for selling different charging devices
 
 
+ADRESS: http://sharker5854.pythonanywhere.com/
+
+
+
 1) The project is started from a file main.py
 
 2) Recommended to open only on 1920x1080 monitors ( no adaptive :3 )
